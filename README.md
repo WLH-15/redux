@@ -2,7 +2,11 @@
 
 In this lecture we introduce `react-redux` which is the official bindings for redux in react.
 
-## Redux Review
+## Lecture Slides
+
+https://slides.com/mattbodily/deck-5c962f
+
+## What is Redux?
 
 Redux is a tool that was created by Dan Abromav that we can use to help manage the `state` for our application. It introduces something known as `application state` and will allow any component that `subscribes` to the `store` to access it.
 
