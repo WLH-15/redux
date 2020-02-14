@@ -122,7 +122,7 @@ const initialState = {
 // Action Types
 const LOGIN_USER = 'LOGIN_USER';
 
-// Action Builders
+// Action Creator
 export function loginUser(user){
     const action = {
         type: LOGIN_USER,
@@ -249,13 +249,13 @@ export default connect(mapStateToProps)(App);
 
 We now have mapped the redux state values onto the `props` of the component, so if you executed `console.log(this.props)` you would see the values from redux.
 
-However, what if we want to `dispatch` an action to our redux store? We will need to first import the `action builders` into our file from the reducer.
+However, what if we want to `dispatch` an action to our redux store? We will need to first import the `action creators` into our file from the reducer.
 
 ```js
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
 
-// import the action builders from the reducer to use
+// import the action creators from the reducer to use
 import {loginUser} from './redux/reducer';
 
 class App extends Component {
@@ -273,7 +273,7 @@ const mapStateToProps = (state) => state
 export default connect(mapStateToProps)(App);
 ```
 
-Once we have the action builders imported, we will need to create an object that contains our action builders inside. This object will be passed to `connect` as the second argument, to correctly map our action builders or "dispatchers" to the props of the component.
+Once we have the action creators imported, we will need to create an object that contains our action creators inside. This object will be passed to `connect` as the second argument, to correctly map our action creators or "dispatchers" to the props of the component.
 
 ```js
 import React, { Component } from 'react'
@@ -297,7 +297,7 @@ const mapStateToProps = (state) => state
 export default connect(mapStateToProps, {loginUser})(App);
 ```
 
-Now when we want to dispatch a specifc action to the redux store we will invoke that action builder function.
+Now when we want to dispatch a specifc action to the redux store we will invoke that action creator function.
 
 ```js
 this.props.loginUser({id: 1, name: 'tayte'});
@@ -307,7 +307,7 @@ We now have full access to read and manipulate the redux store from our componen
 
 ## Redux Promise Middleware
 
-Now when we are wanting to make some sort of `asynchronous` action inside of our `action builders`, we need to configure our store to allow it to happen.
+Now when we are wanting to make some sort of `asynchronous` action inside of our `action creators`, we need to configure our store to allow it to happen.
 
 We will need to use a package called `redux-promise-middleware`, so go ahead an install that package using your terminal.
 
@@ -326,7 +326,7 @@ import promiseMiddleware from 'redux-promise-middleware';
 export default createStore(userReducer, applyMiddleware(promiseMiddleware));
 ```
 
-We have now setup our redux store to allow asynch actions. Now let's set an action builder to get a random user from the 
+We have now setup our redux store to allow asynch actions. Now let's set an action creator to get a random user from the 
 
 In the reducer, make this.
 
@@ -343,7 +343,7 @@ export function getRandomUser(){
 }
 ```
 
-Now once we have this `action builder` created, we need to add a case to our reducer function to handle it. When we make an `http` request, thatr request will go into different stages, `pending`, `fulfilled`, and `rejected`. We can setup cases that will perform some logic for each one of those stages
+Now once we have this `action creator` created, we need to add a case to our reducer function to handle it. When we make an `http` request, thatr request will go into different stages, `pending`, `fulfilled`, and `rejected`. We can setup cases that will perform some logic for each one of those stages
 
 ```js
 import axios from 'axios';
@@ -359,7 +359,7 @@ const initialState = {
 const GET_USER = 'GET_USER';
 
 
-// Action Builder
+// Action Creator
 export function getRandomUser(){
     const randomUser = axios.get('https://randomuser.me/api/').then((res) => res.data.results[0]).catch(error => error.message);
 
